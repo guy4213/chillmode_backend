@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  mysql-container:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: finalproj
+    ports:
+      - "3307:3306"
+    networks:
+      - mynetwork
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p123456 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  finalprojectupdated:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: finalprojectupdated
+    ports:
+      - "8084:8084"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-container:3306/finalproj?createDatabaseIfNotExist=True
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=123456
+      - SPRING_JPA_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL8Dialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_SECURITY_USER_NAME=root
+      - SPRING_SECURITY_USER_PASSWORD=123456
+      - SPRING_SWAGGER_UI_PATH=/swagger
+    depends_on:
+      - mysql-container
+    networks:
+      - mynetwork
+    healthcheck:
+      test: [ "CMD-SHELL", "curl --fail http://localhost:8084/actuator/health || exit 1" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  mynetwork:
+    driver: bridge
