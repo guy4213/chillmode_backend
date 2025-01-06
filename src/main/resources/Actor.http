@@ -1,0 +1,41 @@
+###add a new Actor
+POST http://localhost:8084/api/v1/actors
+content-Type: application/json
+
+{
+  "actorName": "guy franses",
+  "city": "holon",
+  "country": "Israel",
+  "role": "main"
+}
+###get top actors
+GET http://localhost:8084/api/v1/actors/top/2
+
+###get last actors
+GET http://localhost:8084/api/v1/actors/last/3
+
+### get all actors
+GET http://localhost:8084/api/v1/actors
+
+
+### Delete specific Actor
+DELETE http://localhost:8084/api/v1/actors/1
+
+### Update Actor's role
+PUT http://localhost:8084/api/v1/actors/2
+Content-Type: application/json
+
+{
+"actorName": "guy franses",
+  "role": "main"
+}
+
+### get actor by id
+GET http://localhost:8084/api/v1/actors/2
+
+
+
+
+
+### delete all Actors
+DELETE http://localhost:8084/api/v1/actors/deleteAll

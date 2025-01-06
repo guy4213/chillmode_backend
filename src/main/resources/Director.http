@@ -1,0 +1,39 @@
+###add a new Director
+POST http://localhost:8084/api/v1/directors
+content-Type: application/json
+
+{
+  "directorName": "lol",
+  "city": "holon",
+  "country": "Israel"
+
+
+}
+
+###get top Directors
+GET http://localhost:8084/api/v1/directors/top/2
+
+###get last Directors
+GET http://localhost:8084/api/v1/directors/last/2
+
+### get ALL Directors
+GET http://localhost:8084/api/v1/directors
+
+### Delete specific director
+DELETE http://localhost:8084/api/v1/directors/1
+
+### Update Director's country,city
+PUT http://localhost:8084/api/v1/directors/1
+Content-Type: application/json
+
+{
+
+  "country": "England",
+  "city":"London"
+}
+
+### get category by id
+GET http://localhost:8084/api/v1/directors/2000000000
+
+### delete all Directors
+DELETE http://localhost:8084/api/v1/directors/deleteAll

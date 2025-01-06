@@ -1,0 +1,39 @@
+###add a new Category
+POST http://localhost:8084/api/v1/categories
+content-Type: application/json
+
+{
+  "name": "horror",
+  "description": "asdasdasda"
+
+}
+
+###get top categories
+GET http://localhost:8084/api/v1/categories/top/15
+
+###get last categories
+GET http://localhost:8084/api/v1/categories/last/3
+
+### get all categories
+GET http://localhost:8084/api/v1/categories
+
+
+
+### Update category's description
+PUT http://localhost:8084/api/v1/categories/1
+Content-Type: application/json
+
+{
+  "name": "horror",
+  "description": "scary movies and serieses"
+}
+
+### Delete specific category
+DELETE http://localhost:8084/api/v1/categories/4
+
+
+### get category by id
+GET http://localhost:8084/api/v1/categories/1
+
+### delete all categories
+DELETE http://localhost:8084/api/v1/categories/deleteAll

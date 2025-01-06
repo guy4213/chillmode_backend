@@ -1,0 +1,66 @@
+###add new series
+POST  http://localhost:8084/api/v1/series
+content-Type: application/json
+
+{
+  "seriesName": "the 90s",
+ "img": "https://tinyurl.com/nhsesf2z",
+  "publishedYear": 2022 ,
+  "trailer": "https://www.youtube.com/watch?v=Txodgmy67mY",
+  "numberOfEpisodes": "42",
+"seriesDescription": "שנות ה-90 הייתה סדרת טלוויזיה ישראלית מסוגת קומדיית מצבים, העוסקת בקורות משפחתו של שלום אסייג ומציגה בצורה קומית-עדתית את החברה שאפיינה את ישראל בשנות ה-1990. הסדרה משודרת ברשת 13 וממשיכה את העלילה, הדמויות והמאפיינים של הסדרה שנות ה-80. התסריטאי הראשי הוא דניאל אסייג שמככב בסדרה בתפקיד אביו שלום אסייג, ואחיינו של התסריטאי הראשי של הסדרה שנות ה-80, מני אסייג.."
+}
+
+###Add Rate by userId to A Series - only once.
+POST http://localhost:8084/api/v1/series/addRate?userID=2&seriesID=1&rate=4
+content-Type: application/json
+
+
+
+###Add CATEGORIES To A Series
+
+POST  http://localhost:8084/api/v1/series/addCategoriesByNames?SeriesId=2&categoryNames=ho
+
+###Add ACTORS to A Series
+POST http://localhost:8084/api/v1/series/addActorsByNames?SeriesId=1&ActorNames=daniel moreshet,x,g
+
+###Add Director to A Series
+POST http://localhost:8084/api/v1/series/addDirector?SeriesId=1&DirectorName=linoy karzia sheli
+
+
+
+###get top series
+
+GET http://127.0.0.1:8084/api/v1/series/top/5
+###get last series
+GET http://localhost:8084/api/v1/series/last/2
+
+###get all serieses
+GET http://127.0.0.1:8084/api/v1/series?pageNo=0&pageSize=40&sortDir=asc&sortBy=id
+
+### Delete specific series
+DELETE http://localhost:8084/api/v1/series/2
+
+### Update series's num of episodes,description
+PUT http://localhost:8084/api/v1/series/2
+Content-Type: application/json
+
+{
+  "seriesName": " ",
+  "img": "https://tinyurl.com/y72234ta",
+  "trailer": "https://www.youtube.com/watch?v=mqqft2x_Aa4",
+  "publishedYear": 2022 ,
+  "numberOfEpisodes": 6,
+  "seriesDescription":"this is the atalef man"
+}
+
+### get series by id
+GET http://127.0.0.1:8084/api/v1/series/10
+
+
+###Search-searching by seriesName
+GET http://localhost:8084/api/v1/series/contains/12
+
+
+### delete all Serieses
+DELETE http://localhost:8084/api/v1/series/deleteAll.

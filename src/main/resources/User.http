@@ -1,0 +1,69 @@
+###get top users
+GET http://localhost:8084/api/v1/users/top/2
+
+###get last users
+GET http://localhost:8084/api/v1/users/last/2
+
+### UPDATE User's email,password
+PUT http://localhost:8084/api/v1/users/1
+Content-Type: application/json
+
+{
+
+  "email": "guy421367@gmail.com",
+  "password":"Guy7@2000!"
+}
+
+### get ALL users
+GET http://localhost:8084/api/v1/users/ALL
+
+
+### get user by ID
+GET http://localhost:8084/api/v1/users/1
+Authorization: bearer {{AdminJwt}}
+
+###get user by its userName
+GET http://localhost:8084/api/v1/users/getUserByUserName/guy421367
+
+### DELETE BY ID of a specific user by
+DELETE http://localhost:8084/api/v1/users/3
+Authorization: bearer {{AdminJwt}}
+
+
+### get all users until a SPECIFIC NUM
+GET http://localhost:8084/api/v1/users/top/2
+Authorization: bearer {{AdminJwt}}
+
+
+### delete all Users
+DELETE http://localhost:8084/api/v1/users/deleteAll
+Authorization: bearer {{UserJwt}}
+
+###Login Admin(Authentication)
+POST  http://localhost:8084/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "userName": "Guy421367",
+  "password":"Guy7@2000"
+}
+
+###SignUp
+POST http://localhost:8084/api/v1/auth/register
+content-Type: application/json
+
+{
+  "userName": "ofeek22",
+  "email": "guy421s@gmail.com",
+  "password": "Aa123456789!"
+
+
+}
+###Login User(Authentication)
+POST  http://localhost:8084/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "userName": "Ofek9082",
+  "password":"Ofek1@22004"
+}
