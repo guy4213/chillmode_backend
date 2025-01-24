@@ -27,9 +27,9 @@ services:
     ports:
       - "8084:8084"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://sql.freedb.tech:3306/freedb_finalproj?useSSL=true&createDatabaseIfNotExist=True
-      - SPRING_DATASOURCE_USERNAME=freedb_guy421367
-      - SPRING_DATASOURCE_PASSWORD=JHRCawtNwE%?c8?
+      - SPRING_DATASOURCE_URL=jdbc:mysql://finalproj-finalproj.e.aivencloud.com:28378/defaultdb?useSSL=true&createDatabaseIfNotExist=True
+      - SPRING_DATASOURCE_USERNAME=avnadmin
+      - SPRING_DATASOURCE_PASSWORD=AVNS_o9ktNEm74TQQnVdXfoh
       - SPRING_JPA_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL8Dialect
       - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
       - SPRING_JPA_SHOW_SQL=true
