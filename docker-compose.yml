@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 
 services:
   mysql-container:
@@ -21,21 +21,21 @@ services:
 
   finalprojectupdated:
     build:
-      context: .
+      context: ./
       dockerfile: Dockerfile
-    container_name: finalprojectupdated
+    image: finalprojectupdated
     ports:
       - "8084:8084"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/finalproj?createDatabaseIfNotExist=true&useSSL=false
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 123456
-      SPRING_JPA_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      SPRING_JPA_SHOW_SQL: true
-      SPRING_SECURITY_USER_NAME: root
-      SPRING_SECURITY_USER_PASSWORD: 123456
-      SPRING_SWAGGER_UI_PATH: /swagger
+      - SPRING_DATASOURCE_URL=jdbc:mysql://sql.freedb.tech:3306/freedb_finalproj?useSSL=true&createDatabaseIfNotExist=True
+      - SPRING_DATASOURCE_USERNAME=freedb_guy421367
+      - SPRING_DATASOURCE_PASSWORD=JHRCawtNwE%?c8?
+      - SPRING_JPA_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL8Dialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_SECURITY_USER_NAME=root
+      - SPRING_SECURITY_USER_PASSWORD=123456
+      - SPRING_SWAGGER_UI_PATH=/swagger
     depends_on:
       mysql-container:
         condition: service_healthy
