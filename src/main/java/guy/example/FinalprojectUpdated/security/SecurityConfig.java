@@ -41,39 +41,26 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .cors(Customizer.withDefaults())
-                .csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults()) // Apply CORS settings
+                .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for public access
                 .authorizeHttpRequests(
-                        auth -> {
-                            //allow AuthController login/register
-                            auth.requestMatchers("/api/v1/auth/**").permitAll();
-
-                            //secure the rest of the API
-                            auth.requestMatchers("/api/v1/**").permitAll();
-
-                            //  permit any request that does not start with /api/v1
-                            auth.anyRequest().permitAll(); //docs  //swagger
-                        }
+                        auth -> auth.requestMatchers("/api/v1/auth/**").permitAll()
+                                .requestMatchers("/api/v1/**").permitAll()
+                                .anyRequest().permitAll()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
-                .oauth2ResourceServer(auth -> auth.jwt(jwtConfigurer -> {
-                    var jwtConverter = new JwtAuthenticationConverter();
-                    var jwtAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-                    jwtAuthoritiesConverter.setAuthorityPrefix("");
-                    jwtConverter.setJwtGrantedAuthoritiesConverter(jwtAuthoritiesConverter);
-                    jwtConfigurer.jwtAuthenticationConverter(jwtConverter);
-                }))
-//                .httpBasic(withDefaults())
+                .oauth2ResourceServer(auth -> auth.jwt(withDefaults()))
                 .build();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5173", "http://localhost:5173", "http://localhost:5174"));
-        configuration.setAllowCredentials(true);
-        configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers", "Access-Control-Allow-Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", "Origin", "Cache-Control", "Content-Type", "Authorization"));
-        configuration.setAllowedMethods(Arrays.asList("DELETE", "GET", "POST", "PATCH", "PUT"));
+        configuration.setAllowedOrigins(List.of("*")); // Allow all origins
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*")); // Allow all headers
+        configuration.setAllowCredentials(false); // Credentials should be false for public APIs
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
